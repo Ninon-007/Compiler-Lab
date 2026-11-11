@@ -1,34 +1,35 @@
 #include<stdio.h>
+#include<stdlib.h>
 
 int main()
 {
-    char result[10],a[10],b[10],op;
     FILE *fp;
-    fp=fopen("input.txt","r");
-    if(fp == NULL)
+    char a[10],b[10],result[10],op;
+
+    fp = fopen("input.txt","r");
+    if(fp==NULL)
     {
-        printf("File not found");
+        printf("Invalid File !\n");
         return 1;
     }
 
     while(fscanf(fp,"%9s = %9s %c %9s",result,a,&op,b)==4)
     {
         printf("MOV AX %s\n",a);
-
-        if(op == '+')
+        if(op=='+')
         {
             printf("ADD AX %s\n",b);
         }
-        else if(op == '-')
+        else if(op=='-')
         {
             printf("SUB AX %s\n",b);
         }
-        else if(op == '*')
+        else if(op=='*')
         {
             printf("MOV BX %s\n",b);
-            printf("MUL BX");
+            printf("MUL BX\n");
         }
-        else if(op == '/')
+        else if(op=='/')
         {
             printf("MOV BX %s\n",b);
             printf("XOR DX,DX\n");
@@ -36,10 +37,10 @@ int main()
         }
         else
         {
-            printf("Unsupported Operator!!\n");
-            continue;
+            printf("INVALID OPERATOR!");
         }
-        printf("MOV %s AX \n\n",result);
+
+        printf("MOV %s AX\n",result);
     }
 
     fclose(fp);
